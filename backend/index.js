@@ -1,13 +1,24 @@
 const connectToMongo = require('./db');
 const express = require('express')
 connectToMongo();
+const authentication = require('./routes/auth');
+const notes = require('./routes/notes');
 
 const app = express()
 const port = 2323
 
-app.get('/', (req, res) => {
-  res.send('Hello Taimoor Ali!')
-})
+
+// Available Routes
+
+app.use('/api/auth' , authentication);
+app.use('/api/notes' , notes);
+
+
+
+// app.get('/', (req, res) => {
+//   res.send('Hello Taimoor Ali!')
+// })
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
