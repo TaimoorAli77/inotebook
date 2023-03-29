@@ -21,5 +21,6 @@ date:{
 }
 
 });
-
-module.exports = mongoose.model('user',UserSchema);
+const User=mongoose.model('user',UserSchema);
+User.createIndexes();    //to avoid same data duplication
+module.exports = User;
