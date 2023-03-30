@@ -22,5 +22,5 @@ date:{
 
 });
 const User=mongoose.model('user',UserSchema);
-User.createIndexes();    //to avoid same data duplication
+// User.createIndexes();    to avoid same data duplication but made two indexes
 module.exports = User;
