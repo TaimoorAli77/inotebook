@@ -13,11 +13,12 @@ class App extends Component {
       <React.Fragment>
       <BrowserRouter>
       <Navbar /> 
-
+      <div className="container">
       <Routes>  
        <Route path="/"  element={ <Home /> } />
        <Route path="/about"  element={ <About /> } />
       </Routes>
+      </div>
       </BrowserRouter>
       </React.Fragment>
       </NoteState>
