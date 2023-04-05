@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import NoteState from './context/notes/NoteStates';
+import Alert from './components/Alert';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
       <React.Fragment>
       <BrowserRouter>
       <Navbar /> 
+      <Alert  message="Alert is success." />
       <div className="container">
       <Routes>  
        <Route path="/"  element={ <Home /> } />
