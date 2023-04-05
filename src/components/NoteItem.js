@@ -2,9 +2,9 @@ import React from 'react';
 import noteContext from '../context/notes/noteContext';
 import { useContext } from 'react';
 const NoteItem = (props) => {
-    const { note } = props;
     const context = useContext(noteContext);
     const {deleteNote} = context;
+    const { note } = props;
     return (
         <div className='col-md-3'>
             <div className="card my-3" >
