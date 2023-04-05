@@ -5,8 +5,8 @@ const authentication = require('./routes/auth');
 const notes = require('./routes/notes');
 const app = express()
 const port = 5000
-
-
+var cors = require('cors')
+app.use(cors())
 // Available Routes
 app.use(express.json());   
 
