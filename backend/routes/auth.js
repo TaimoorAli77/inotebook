@@ -39,7 +39,8 @@ router.post('/createuser', [
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET)
-    res.json({ authToken });
+    success=true;
+    res.json({ success:authToken });
   }
   catch (error) {
     console.error(error.message);
@@ -53,7 +54,7 @@ router.post('/login', [
   body('email', 'Enter a valid Email').isEmail(),
   body('password', 'Passward can not be blank').exists()
 ], async (req, res) => {
-
+  let success=false;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -66,7 +67,7 @@ router.post('/login', [
     }
     const passwardcompare = await bcrypt.compare(password, user.password);
     if (!passwardcompare) {
-      return res.status(404).json({ error: "Please try to login with the correct credentials." })
+      return res.status(404).json({success:false, error: "Please try to login with the correct credentials." })
     }
 
     const data = {
@@ -75,7 +76,7 @@ router.post('/login', [
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET)
-    res.json({ authToken });
+    res.json({ success:true , authToken });
   }
   catch (error) {
     console.error(error.message);
