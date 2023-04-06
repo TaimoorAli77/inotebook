@@ -1,8 +1,5 @@
 import NoteContext from './noteContext'
 import React, { useState } from 'react'
-// eslint-disable-next-line
-import addNote from '../../components/AddNote';
-
 
 const NoteState = (props) => {
   const host = "http://localhost:5000"
@@ -47,7 +44,7 @@ const NoteState = (props) => {
 // eslint-disable-next-line 
     const json = response.json();
     // const json = await response.json();
-    // console.log(json)
+    console.log(json)
     // setNotes(json)
     // eslint-disable-next-line
     console.log("adding a new note")
@@ -92,7 +89,7 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     // Api call
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyNzI2YmZhZDRkZWMzMjQyOWNjNTI5In0sImlhdCI6MTY4MDMzNTk2MH0.vZdBy_SScU8Piuo3b4r_w47qVDHZh8nb-CAbMVgtVrI'
@@ -100,16 +97,21 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag })
     });
 // eslint-disable-next-line 
-    const json = response.json();
+    const json = await response.json();
+    console.log(json)
+
+    let newNotes= JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
       }
     }
+    setNotes(newNotes);
   }
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
