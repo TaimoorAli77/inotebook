@@ -38,9 +38,12 @@ const {name , email, password}=credentials;
 
 
   return (
-    <div className='container'>
+    
+    <div className='container mt-2'>
+      <h2 className='text-center my-2'>Create an account to use iNotebook</h2>
+
       <form onSubmit={handleSubmit}>
-        <div className="mb-3" >
+        <div className="mb-3 mt-3" >
           <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" id="name"  name="name"  onChange={onChange} aria-describedby="emailHelp" />
         </div>

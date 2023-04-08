@@ -16,7 +16,7 @@ const NoteState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyNzI2YmZhZDRkZWMzMjQyOWNjNTI5In0sImlhdCI6MTY4MDMzNTk2MH0.vZdBy_SScU8Piuo3b4r_w47qVDHZh8nb-CAbMVgtVrI'
+        'auth-token': localStorage.getItem('token')
       }
     });
 
@@ -27,7 +27,7 @@ const NoteState = (props) => {
 
 
 
-   
+
 
   //Adding a new note
   const addNote = async (title, description, tag) => {
@@ -36,11 +36,11 @@ const NoteState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyNzI2YmZhZDRkZWMzMjQyOWNjNTI5In0sImlhdCI6MTY4MDMzNTk2MH0.vZdBy_SScU8Piuo3b4r_w47qVDHZh8nb-CAbMVgtVrI'
+        'auth-token': localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag })
     });
-// eslint-disable-next-line 
+    // eslint-disable-next-line 
     const note = await response.json();
     setNotes(notes.concat(note));
   }
@@ -55,12 +55,12 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyNzI2YmZhZDRkZWMzMjQyOWNjNTI5In0sImlhdCI6MTY4MDMzNTk2MH0.vZdBy_SScU8Piuo3b4r_w47qVDHZh8nb-CAbMVgtVrI'
+        'auth-token': localStorage.getItem('token')
       }
     });
-// eslint-disable-next-line 
-    const json =await  response.json();
-    const newNotes =notes.filter((note)=>{return note._id!==id})
+    // eslint-disable-next-line 
+    const json = await response.json();
+    const newNotes = notes.filter((note) => { return note._id !== id })
     setNotes(newNotes);
 
 
@@ -74,14 +74,14 @@ const NoteState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyNzI2YmZhZDRkZWMzMjQyOWNjNTI5In0sImlhdCI6MTY4MDMzNTk2MH0.vZdBy_SScU8Piuo3b4r_w47qVDHZh8nb-CAbMVgtVrI'
+        'auth-token': localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag })
     });
-// eslint-disable-next-line 
+    // eslint-disable-next-line 
     const json = await response.json();
 
-    let newNotes= JSON.parse(JSON.stringify(notes))
+    let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
       const element = newNotes[index];

@@ -18,12 +18,10 @@ const navigate = useNavigate();
      console.log(json); 
   
      if(json.success){
-
       //save the auth token and redirect
       localStorage.setItem('token', json.authToken);
+      props.showAlert("LoggedIn Successfully", "success") 
       navigate("/");
-    props.showAlert("LoggedIn Successfully", "success") 
-
      }
      else{   
        props.showAlert("Invalid Details", "Danger") 
@@ -36,9 +34,10 @@ const navigate = useNavigate();
 
 
   return (
-    <div>
+    <div className='mt-5'>
+      <h2 className='text-center'>Login to continue to iNotebook</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="mb-3 mt-3 ">
           <label htmlFor="email" className="form-label">Email address</label>
           <input type="email" className="form-control"  value={credentials.email} onChange={onchange} id="email" name='email' aria-describedby="emailHelp" /> 
         </div>

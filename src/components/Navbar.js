@@ -1,7 +1,12 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
   let location = useLocation();
+let navigate= useNavigate();
+  const handleLogout = ()=>{
+    localStorage.removeItem('token');
+    navigate('/login')
+  }
   return (
     <React.Fragment>
       <div>
@@ -21,10 +26,10 @@ const Navbar = () => {
                     <Link className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} to="/about">About</Link>
                   </li>
                 </ul>
-                <form className="d-flex">
+                {!localStorage.getItem('token')?<form className="d-flex">
                   <Link className="btn btn-outline-success bg-success mx-1 text-white" to="/login" role="button">Login</Link>
                   <Link className="btn btn-outline-success bg-success mx-1 text-white" to="/signup" role="button">Signup</Link>
-                </form>
+                </form>:<Link className="btn btn-outline-success bg-success mx-1 text-white" onClick={handleLogout} to="/login" role="button">LogOut</Link> }
               </div>
             </div>
           </nav>
